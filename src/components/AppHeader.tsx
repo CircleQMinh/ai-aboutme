@@ -29,7 +29,7 @@ export interface UserMenuItem {
 const NAV_ITEMS: NavItem[] = [
   { label: "Home", path: "/" },
   { label: "About", path: "/about" },
-  { label: "Pricing", path: "/pricing" },
+  { label: "Form", path: "/form" },
   { label: "Blog", path: "/blog" },
 ];
 
