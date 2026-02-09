@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./lib/redux/store.ts";
 
-import { ThemeProvider, CssBaseline, createTheme } from "@mui/material";
+import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
   palette: {
@@ -27,10 +27,10 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
+
+   
           <App />
-        </ThemeProvider>
+
       </BrowserRouter>
     </Provider>
   </StrictMode>

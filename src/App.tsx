@@ -1,10 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import About from "./pages/About";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import { MainLayout } from "./layouts/MainLayout";
-import Form from "./pages/Form";
+import Chat from "./pages/Chat";
 
 function App() {
   return (
@@ -13,8 +12,7 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/form" element={<Form />} />
+          <Route path="/chat" element={<Chat />} />
           <Route path="*" element={<NotFound />} />
         </Route>
 

@@ -4,12 +4,10 @@ import {
   Typography,
   Button,
   Box,
-  Avatar,
   Container,
   IconButton,
   Menu,
   MenuItem,
-  Tooltip,
   
 } from "@mui/material";
 import React from "react";
@@ -28,9 +26,7 @@ export interface UserMenuItem {
 
 const NAV_ITEMS: NavItem[] = [
   { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
-  { label: "Form", path: "/form" },
-  { label: "Blog", path: "/blog" },
+  { label: "Ask about me", path: "/chat" },
 ];
 
 interface NavMenuProps {
@@ -65,17 +61,13 @@ export function AppHeader() {
   const navigate = useNavigate();
 
   const [navAnchor, setNavAnchor] = React.useState<HTMLElement | null>(null);
-  const [userAnchor, setUserAnchor] = React.useState<HTMLElement | null>(null);
 
   const openNav = (e: React.MouseEvent<HTMLElement>) =>
     setNavAnchor(e.currentTarget);
 
   const closeNav = () => setNavAnchor(null);
 
-  const openUser = (e: React.MouseEvent<HTMLElement>) =>
-    setUserAnchor(e.currentTarget);
 
-  const closeUser = () => setUserAnchor(null);
 
   const handleNavigate = (path: string) => {
     closeNav();
@@ -83,7 +75,12 @@ export function AppHeader() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{
+      backgroundColor: "#1a1a1a",
+      border: "1px #D4AF37 solid",
+      margin:"5px",
+      width: "99%"
+    }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Logo (desktop) */}
@@ -96,7 +93,7 @@ export function AppHeader() {
               letterSpacing: ".3rem",
             }}
           >
-            LOGO
+            Minh Vu
           </Typography>
 
           {/* Mobile menu */}
@@ -142,28 +139,7 @@ export function AppHeader() {
             />
           </Box>
 
-          {/* User menu */}
-          <Box>
-            <Tooltip title="Account settings">
-              <IconButton onClick={openUser}>
-                <Avatar alt="User" />
-              </IconButton>
-            </Tooltip>
 
-            <Menu
-              anchorEl={userAnchor}
-              open={Boolean(userAnchor)}
-              onClose={closeUser}
-              anchorOrigin={{ vertical: "top", horizontal: "right" }}
-              transformOrigin={{ vertical: "top", horizontal: "right" }}
-              sx={{ marginTop:"32px" }}
-            >
-              <MenuItem onClick={closeUser}>Profile</MenuItem>
-              <MenuItem onClick={closeUser}>Account</MenuItem>
-              <MenuItem onClick={closeUser}>Dashboard</MenuItem>
-              <MenuItem onClick={closeUser}>Logout</MenuItem>
-            </Menu>
-          </Box>
         </Toolbar>
       </Container>
     </AppBar>
