@@ -13,6 +13,7 @@ import {
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
+import { baseRepoName } from "../shared/types";
 
 export interface NavItem {
   label: string;
@@ -25,8 +26,8 @@ export interface UserMenuItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: "Home", path: "/" },
-  { label: "Ask about me", path: "/chat" },
+  { label: "Home", path: `${baseRepoName}/` },
+  { label: "Ask about me", path: `${baseRepoName}/chat` },
 ];
 
 interface NavMenuProps {

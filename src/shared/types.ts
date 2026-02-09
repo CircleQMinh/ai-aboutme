@@ -51,6 +51,8 @@ export interface Meta {
   qrCode: string;
 }
 
+export const baseRepoName = '/ai-aboutme'
+
 
 export type MessageRole = 'user' | 'assistant';
 
