@@ -9,12 +9,7 @@ interface ChatInputProps {
   disabled?: boolean
 }
 
-/**
- * Chat input area with auto-expanding textarea
- * - Enter sends, Shift+Enter creates newline
- * - Auto-scroll focus to bottom
- * - Disabled send button when empty
- */
+
 export const ChatInput: React.FC<ChatInputProps> = ({
   input,
   onInputChange,

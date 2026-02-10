@@ -5,15 +5,17 @@ import type { Message } from '../../shared/types'
 import { ChatMessage } from './ChatMessage'
 import { ChatInput } from './ChatInput'
 import { TypingIndicator } from './TypingIndicator'
+import { useAppDispatch, useAppSelector } from '../../lib/redux/hooks/hooks'
+import { selectChatMessages } from '../../lib/redux/selectors/chatSelector'
+import { setMessages } from '../../lib/redux/slices/chatSlice'
+import { useSendMessageMutation } from '../../lib/redux/api/chatApi'
 
-/**
- * Production-grade chat interface
- * - Future-proof for streaming, markdown, tools, citations
- * - Enterprise-appropriate minimal design
- * - Proper focus and accessibility
- */
+
 export const ChatPage: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>([])
+  const dispatch = useAppDispatch()
+  const messages = useAppSelector(selectChatMessages) 
+  const [sendMessage] = useSendMessageMutation();
+
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
@@ -36,26 +38,27 @@ export const ChatPage: React.FC = () => {
       id: `msg-${Date.now()}`,
       role: 'user',
       content: input,
-      createdAt: new Date(),
     }
 
-    setMessages((prev) => [...prev, userMessage])
+    dispatch(setMessages(userMessage))
     setInput('')
     setIsLoading(true)
 
     // Simulate backend delay (2 seconds as specified)
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    // await new Promise((resolve) => setTimeout(resolve, 2000))
+
+    const response = await sendMessage(input).unwrap();
+
+   
 
     // Add assistant response
     const assistantMessage: Message = {
       id: `msg-${Date.now() + 1}`,
       role: 'assistant',
-      content:
-        'This is a mock AI response. I can respond to anything you write! Backend streaming, markdown rendering, tool responses, and citations will be added later.',
-      createdAt: new Date(),
+      content: response,
     }
 
-    setMessages((prev) => [...prev, assistantMessage])
+    dispatch(setMessages(assistantMessage))
     setIsLoading(false)
   }
 
@@ -66,6 +69,7 @@ export const ChatPage: React.FC = () => {
         <div className="max-w-2xl mx-auto">
           <h1 className="text-xl font-semibold text-foreground">Chat Assistant</h1>
           <p className="text-sm text-muted-foreground mt-1">
+            Ask anything about Minh<br></br>
             Send a message to start the conversation
           </p>
         </div>

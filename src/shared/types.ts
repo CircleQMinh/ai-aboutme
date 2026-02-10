@@ -60,7 +60,6 @@ export interface Message {
   id: string;
   role: MessageRole;
   content: string;
-  createdAt: Date;
   status?: 'sent' | 'pending' | 'error';
 }
 
@@ -68,4 +67,11 @@ export interface ChatState {
   messages: Message[];
   isLoading: boolean;
   error: string | null;
+}
+
+export interface ChatResponse {
+  products: DummyItem[];
+  total: number;
+  skip: number;
+  limit: number;
 }
